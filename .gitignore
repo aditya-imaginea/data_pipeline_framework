@@ -1,0 +1,30 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment
+venv/
+.env
+
+# Docker
+*.log
+*.pid
+*.tar
+*.db
+*.sqlite3
+*.lock
+
+# Environment variables / secrets
+.env
+*.env
+OPENAI_API_KEY
+
+# IDE/editor settings
+.vscode/
+.idea/
+
+# Output artifacts
+batches/
+state_logs/
+*.jsonl

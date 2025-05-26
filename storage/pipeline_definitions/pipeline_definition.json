@@ -1,0 +1,11 @@
+{
+  "name": "capital_validation_pipeline",
+  "steps": [
+    {
+      "name": "capital_check",
+      "pre_script": "scripts/sample_pipeline/capital_pre_hook.py",
+      "main_script": "scripts/sample_pipeline/capital_transform.py",
+      "post_script": "scripts/sample_pipeline/capital_post_hook.py"
+    }
+  ]
+}

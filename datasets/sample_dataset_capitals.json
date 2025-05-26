@@ -1,0 +1,502 @@
+[
+  {
+    "id": "104",
+    "country": "Italy",
+    "capital": "Rome"
+  },
+  {
+    "id": "157",
+    "country": "Argentina",
+    "capital": "Stockholm"
+  },
+  {
+    "id": "165",
+    "country": "Mexico",
+    "capital": "Stockholm"
+  },
+  {
+    "id": "172",
+    "country": "Switzerland",
+    "capital": "Mexico City"
+  },
+  {
+    "id": "106",
+    "country": "UK",
+    "capital": "London"
+  },
+  {
+    "id": "138",
+    "country": "Argentina",
+    "capital": "Buenos Aires"
+  },
+  {
+    "id": "137",
+    "country": "Germany",
+    "capital": "Berlin"
+  },
+  {
+    "id": "135",
+    "country": "Netherlands",
+    "capital": "Amsterdam"
+  },
+  {
+    "id": "181",
+    "country": "France",
+    "capital": "Lisbon"
+  },
+  {
+    "id": "101",
+    "country": "Portugal",
+    "capital": "Lisbon"
+  },
+  {
+    "id": "185",
+    "country": "Italy",
+    "capital": "Delhi"
+  },
+  {
+    "id": "124",
+    "country": "South Africa",
+    "capital": "Pretoria"
+  },
+  {
+    "id": "163",
+    "country": "Netherlands",
+    "capital": "Washington"
+  },
+  {
+    "id": "189",
+    "country": "Argentina",
+    "capital": "Canberra"
+  },
+  {
+    "id": "143",
+    "country": "Portugal",
+    "capital": "Lisbon"
+  },
+  {
+    "id": "191",
+    "country": "Sweden",
+    "capital": "Delhi"
+  },
+  {
+    "id": "140",
+    "country": "Turkey",
+    "capital": "Ankara"
+  },
+  {
+    "id": "128",
+    "country": "South Africa",
+    "capital": "Pretoria"
+  },
+  {
+    "id": "123",
+    "country": "Sweden",
+    "capital": "Stockholm"
+  },
+  {
+    "id": "174",
+    "country": "Egypt",
+    "capital": "Pretoria"
+  },
+  {
+    "id": "105",
+    "country": "Netherlands",
+    "capital": "Amsterdam"
+  },
+  {
+    "id": "167",
+    "country": "New Zealand",
+    "capital": "Buenos Aires"
+  },
+  {
+    "id": "161",
+    "country": "India",
+    "capital": "Pretoria"
+  },
+  {
+    "id": "182",
+    "country": "Italy",
+    "capital": "Tokyo"
+  },
+  {
+    "id": "166",
+    "country": "Italy",
+    "capital": "Beijing"
+  },
+  {
+    "id": "107",
+    "country": "Spain",
+    "capital": "Madrid"
+  },
+  {
+    "id": "112",
+    "country": "Australia",
+    "capital": "Canberra"
+  },
+  {
+    "id": "109",
+    "country": "Turkey",
+    "capital": "Ankara"
+  },
+  {
+    "id": "155",
+    "country": "Russia",
+    "capital": "Wellington"
+  },
+  {
+    "id": "178",
+    "country": "Sweden",
+    "capital": "Ankara"
+  },
+  {
+    "id": "190",
+    "country": "Greece",
+    "capital": "Mexico City"
+  },
+  {
+    "id": "162",
+    "country": "Spain",
+    "capital": "Bern"
+  },
+  {
+    "id": "147",
+    "country": "Norway",
+    "capital": "Oslo"
+  },
+  {
+    "id": "146",
+    "country": "Sweden",
+    "capital": "Stockholm"
+  },
+  {
+    "id": "180",
+    "country": "France",
+    "capital": "Mexico City"
+  },
+  {
+    "id": "117",
+    "country": "Turkey",
+    "capital": "Ankara"
+  },
+  {
+    "id": "149",
+    "country": "Italy",
+    "capital": "Rome"
+  },
+  {
+    "id": "197",
+    "country": "China",
+    "capital": "Cairo"
+  },
+  {
+    "id": "183",
+    "country": "Norway",
+    "capital": "Bras\u00edlia"
+  },
+  {
+    "id": "151",
+    "country": "Argentina",
+    "capital": "Stockholm"
+  },
+  {
+    "id": "160",
+    "country": "South Africa",
+    "capital": "Oslo"
+  },
+  {
+    "id": "114",
+    "country": "Switzerland",
+    "capital": "Bern"
+  },
+  {
+    "id": "127",
+    "country": "Netherlands",
+    "capital": "Amsterdam"
+  },
+  {
+    "id": "173",
+    "country": "Argentina",
+    "capital": "Rome"
+  },
+  {
+    "id": "121",
+    "country": "Mexico",
+    "capital": "Mexico City"
+  },
+  {
+    "id": "158",
+    "country": "Portugal",
+    "capital": "Paris"
+  },
+  {
+    "id": "177",
+    "country": "South Africa",
+    "capital": "Bern"
+  },
+  {
+    "id": "111",
+    "country": "China",
+    "capital": "Beijing"
+  },
+  {
+    "id": "136",
+    "country": "Russia",
+    "capital": "Moscow"
+  },
+  {
+    "id": "120",
+    "country": "Italy",
+    "capital": "Rome"
+  },
+  {
+    "id": "170",
+    "country": "Japan",
+    "capital": "Ankara"
+  },
+  {
+    "id": "144",
+    "country": "Switzerland",
+    "capital": "Bern"
+  },
+  {
+    "id": "139",
+    "country": "Russia",
+    "capital": "Moscow"
+  },
+  {
+    "id": "193",
+    "country": "Russia",
+    "capital": "Wellington"
+  },
+  {
+    "id": "153",
+    "country": "Portugal",
+    "capital": "Delhi"
+  },
+  {
+    "id": "188",
+    "country": "UK",
+    "capital": "Athens"
+  },
+  {
+    "id": "142",
+    "country": "Mexico",
+    "capital": "Mexico City"
+  },
+  {
+    "id": "141",
+    "country": "Australia",
+    "capital": "Canberra"
+  },
+  {
+    "id": "122",
+    "country": "Portugal",
+    "capital": "Lisbon"
+  },
+  {
+    "id": "176",
+    "country": "Mexico",
+    "capital": "Pretoria"
+  },
+  {
+    "id": "100",
+    "country": "Portugal",
+    "capital": "Lisbon"
+  },
+  {
+    "id": "196",
+    "country": "Canada",
+    "capital": "Berlin"
+  },
+  {
+    "id": "145",
+    "country": "Russia",
+    "capital": "Moscow"
+  },
+  {
+    "id": "102",
+    "country": "Russia",
+    "capital": "Moscow"
+  },
+  {
+    "id": "150",
+    "country": "UK",
+    "capital": "Cairo"
+  },
+  {
+    "id": "129",
+    "country": "Japan",
+    "capital": "Tokyo"
+  },
+  {
+    "id": "171",
+    "country": "Mexico",
+    "capital": "London"
+  },
+  {
+    "id": "192",
+    "country": "Argentina",
+    "capital": "Mexico City"
+  },
+  {
+    "id": "115",
+    "country": "Canada",
+    "capital": "Ottawa"
+  },
+  {
+    "id": "119",
+    "country": "Turkey",
+    "capital": "Ankara"
+  },
+  {
+    "id": "134",
+    "country": "India",
+    "capital": "Delhi"
+  },
+  {
+    "id": "152",
+    "country": "Norway",
+    "capital": "Delhi"
+  },
+  {
+    "id": "168",
+    "country": "Australia",
+    "capital": "Bras\u00edlia"
+  },
+  {
+    "id": "148",
+    "country": "Egypt",
+    "capital": "Cairo"
+  },
+  {
+    "id": "108",
+    "country": "Japan",
+    "capital": "Tokyo"
+  },
+  {
+    "id": "175",
+    "country": "UK",
+    "capital": "Oslo"
+  },
+  {
+    "id": "133",
+    "country": "Australia",
+    "capital": "Canberra"
+  },
+  {
+    "id": "103",
+    "country": "Greece",
+    "capital": "Athens"
+  },
+  {
+    "id": "156",
+    "country": "Greece",
+    "capital": "Amsterdam"
+  },
+  {
+    "id": "184",
+    "country": "South Africa",
+    "capital": "Ankara"
+  },
+  {
+    "id": "198",
+    "country": "Sweden",
+    "capital": "Bern"
+  },
+  {
+    "id": "186",
+    "country": "Switzerland",
+    "capital": "Cairo"
+  },
+  {
+    "id": "169",
+    "country": "Norway",
+    "capital": "Bern"
+  },
+  {
+    "id": "116",
+    "country": "Switzerland",
+    "capital": "Bern"
+  },
+  {
+    "id": "126",
+    "country": "USA",
+    "capital": "Washington"
+  },
+  {
+    "id": "164",
+    "country": "Germany",
+    "capital": "Buenos Aires"
+  },
+  {
+    "id": "113",
+    "country": "Australia",
+    "capital": "Canberra"
+  },
+  {
+    "id": "195",
+    "country": "India",
+    "capital": "Pretoria"
+  },
+  {
+    "id": "118",
+    "country": "Sweden",
+    "capital": "Stockholm"
+  },
+  {
+    "id": "159",
+    "country": "Russia",
+    "capital": "Athens"
+  },
+  {
+    "id": "179",
+    "country": "Canada",
+    "capital": "Delhi"
+  },
+  {
+    "id": "199",
+    "country": "France",
+    "capital": "Madrid"
+  },
+  {
+    "id": "130",
+    "country": "USA",
+    "capital": "Washington"
+  },
+  {
+    "id": "125",
+    "country": "Italy",
+    "capital": "Rome"
+  },
+  {
+    "id": "187",
+    "country": "USA",
+    "capital": "Pretoria"
+  },
+  {
+    "id": "132",
+    "country": "Netherlands",
+    "capital": "Amsterdam"
+  },
+  {
+    "id": "110",
+    "country": "Australia",
+    "capital": "Canberra"
+  },
+  {
+    "id": "194",
+    "country": "Australia",
+    "capital": "Berlin"
+  },
+  {
+    "id": "131",
+    "country": "Japan",
+    "capital": "Tokyo"
+  },
+  {
+    "id": "154",
+    "country": "Sweden",
+    "capital": "Braslia"
+  }
+]

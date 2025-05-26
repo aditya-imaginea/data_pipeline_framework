@@ -1,0 +1,27 @@
+# Core dependencies
+pydantic>=1.10.0          # For models and validation
+PyYAML>=6.0               # For loading YAML pipeline definitions
+fastapi>=0.100.0          # FastAPI backend (use Flask instead if needed)
+uvicorn[standard]>=0.23.0 # ASGI server for FastAPI
+sqlalchemy>=2.0.0         # For state tracker DB (PostgreSQL or SQLite)
+sqlite-utils>=3.33        # Optional: simple SQLite helpers
+
+# Optional dependencies
+pandas>=2.0.0             # For data transformation and dataset handling
+requests>=2.31.0          # For HTTP calls, if needed in any pipeline step
+
+# Dev and Testing
+pytest>=7.4.0
+pytest-mock>=3.11.0
+
+# Linting & formatting (optional but recommended)
+black>=23.7.0
+flake8>=6.1.0
+mypy>=1.5.0
+
+#openapi
+
+openai>=1.0.0
+
+# Dockerized execution support
+python-dotenv>=1.0.0      # If using .env for runtime_config.yaml or container envs
