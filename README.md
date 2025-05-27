@@ -1,150 +1,165 @@
-# 🛠️ Data Pipeline Framework
+# 🧠 Data Pipeline Framework (Dockerized + AI-Validated)
 
-This project is a flexible and extensible data pipeline framework designed to support batch processing of data using pre-hooks, main transformations, and post-hooks. It supports concurrent execution using Docker and includes OpenAI-based validation for intelligent transformation steps.
+A modular, Dockerized data pipeline framework that allows users to define, submit, and validate data pipelines using OpenAI for transformation accuracy. Includes REST API for dynamic pipeline submissions.
 
 ---
 
 ## 🚀 Features
 
-- 🔄 Modular pipeline with configurable `pre`, `main`, and `post` hooks
-- 📦 Batch processing: processes data in 100-record chunks
-- 🐳 Docker-based isolation for parallel execution
-- 🤖 OpenAI integration for semantic validation
-- ✅ Unit and integration test support
-- 📁 Simple JSON-based pipeline definitions and datasets
+- ✅ Modular pre-hook, transform, and post-hook logic
+- 🐳 Docker-based batch processing (parallel per 100 records)
+- 🧾 OpenAI integration for data validation
+- 🛠️ REST API (FastAPI) to submit and fetch pipeline results
+- 📂 Auto-generated Swagger docs at `/docs`
+- 📦 Git-friendly structure with test coverage
 
 ---
 
-## 📂 Project Structure
+## 📁 Project Structure
 
 ```
 data_pipeline_framework/
-│
-├── pipeline/                      # Core pipeline engine
-│   ├── engine.py                  # Main execution logic
-│   ├── executor.py                # Executes steps for each record
-│   ├── loader.py                  # Loads datasets and pipeline definitions
-│   └── state_tracker.py          # Logs transformation states
-│
-├── scripts/                       # Scripts used in pipeline steps
-│   └── sample_pipeline/
-│       ├── capital_pre_hook.py
-│       ├── capital_transform.py
-│       └── capital_post_hook.py
-│
+├── api/
+│   └── main.py                # FastAPI entrypoint
+├── batches/                   # Auto-generated data batches
+├── pipeline/
+│   ├── engine.py              # Core pipeline execution
+│   └── loader.py              # Loads pipeline definitions & datasets
+├── scripts/sample_pipeline/
+│   ├── capital_pre_hook.py
+│   ├── capital_transform.py
+│   └── capital_post_hook.py
 ├── datasets/
-│   └── sample_dataset.json       # Input dataset with correct/incorrect records
-│
+│   └── sample_dataset.json
 ├── storage/
 │   └── pipeline_definitions/
 │       └── pipeline_definition.json
-│
-├── state_logs/                   # Output from pipeline steps
-│
-├── tests/
-│   └── test_pipeline_execution.py
-│
-├── batch_runner.py               # Orchestrates batch-wise processing in Docker
-├── Dockerfile                    # Builds image for processing batches
-├── requirements.txt              # Python dependencies
+├── output/
+│   └── aggregated_results/    # Final results per request_id
+├── Dockerfile
+├── requirements.txt
+├── batch_runner.py
 └── README.md
 ```
 
 ---
 
-## 🧪 Running Tests
+## 🧪 Example Record Format
 
-To run tests using `pytest`:
+### ✅ Valid
+```json
+{"id": "100", "country": "India", "capital": "Delhi"}
+```
 
-```bash
-pytest tests/
+### ❌ Invalid
+```json
+{"id": "101", "country": "UK", "capital": "Islamabad"}
 ```
 
 ---
 
-## 🐳 Docker Usage
+## ⚙️ Setup
 
-### Build Docker Image
+### ▶️ Local Setup
 
 ```bash
-docker build -t data-pipeline:latest .
+# 1. Clone the repo
+git clone https://github.com/your-username/data_pipeline_framework.git
+cd data_pipeline_framework
+
+# 2. Set up virtualenv
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+
+# 3. Run API
+uvicorn api.main:app --reload
 ```
 
-### Run Batch Processing
+### 🐳 Docker Setup
 
 ```bash
+# Build the Docker image
+docker build -t data-pipeline:latest .
+
+# Run pipeline using Docker
 python batch_runner.py
 ```
-
-Each batch spawns a separate Docker container, and the logs are stored in `state_logs/`.
 
 ---
 
 ## 🔑 Environment Variables
 
-Set the OpenAI API key before running:
+Set your OpenAI key locally or via Docker:
 
-### Locally:
+### Local
 ```bash
-export OPENAI_API_KEY=your_openai_key
+export OPENAI_API_KEY=your-key
 ```
 
-### In Docker (e.g. in `batch_runner.py`):
-
-Add to the `cmd` block:
-```python
-"-e", "OPENAI_API_KEY"
+### Docker
+Pass as environment variable:
+```bash
+docker run -e OPENAI_API_KEY=your-key ...
 ```
 
 ---
 
-## 🧠 OpenAI Integration
+## 🌐 API Endpoints
 
-The framework uses OpenAI for:
+### 📤 `POST /submit_pipeline`
 
-- Validating the factual accuracy of input data (`capital_transform.py`)
-- Assessing correctness of transformations (`capital_post_hook.py`)
+Submit your dataset and pipeline for processing.
 
-Ensure you have proper access to a valid OpenAI model (`gpt-3.5-turbo`, `gpt-4`, etc.).
+- `pipeline_file`: JSON file
+- `dataset_file`: JSON file
 
----
-
-## 📝 Sample Dataset Format
-
+✅ Response:
 ```json
-[
-  {"id": "100", "country": "India", "capital": "Delhi"},
-  {"id": "101", "country": "UK", "capital": "Islamabad"} // Incorrect capital
-]
+{ "request_id": "abc123" }
 ```
 
 ---
 
-## 🔧 Pipeline Definition
+### 📥 `GET /get_result/{request_id}`
 
+Returns the aggregated result for a given request ID.
+
+✅ Response:
 ```json
 {
-  "steps": [
-    {
-      "name": "capital_step",
-      "pre_script": "scripts/sample_pipeline/capital_pre_hook.py",
-      "main_script": "scripts/sample_pipeline/capital_transform.py",
-      "post_script": "scripts/sample_pipeline/capital_post_hook.py"
-    }
+  "results": [
+    { "id": "100", "result": "valid work" },
+    ...
   ]
 }
 ```
 
 ---
 
-## 📌 Notes
+## 🧠 Powered By
 
-- Ensure all scripts have a `transform(record)` function.
-- Output is logged per batch in the `state_logs/` folder.
-- Update `requirements.txt` with necessary packages like `openai`.
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [Docker](https://www.docker.com/)
+- [OpenAI Python SDK](https://github.com/openai/openai-python)
+- [Uvicorn](https://www.uvicorn.org/)
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Submit a PR 🙌
 
 ---
 
 ## 📄 License
 
-MIT License. See `LICENSE` file.
+MIT License — feel free to use with attribution.
+
+---
+
+## 📬 Questions?
+
+Ping `aditya.palagummi@yourdomain.com` or open an issue.
