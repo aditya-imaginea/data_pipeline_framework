@@ -20,8 +20,12 @@ flake8>=6.1.0
 mypy>=1.5.0
 
 #openapi
-
 openai>=1.0.0
+
+#for RESTful container
+fastapi
+uvicorn
+python-multipart
 
 # Dockerized execution support
 python-dotenv>=1.0.0      # If using .env for runtime_config.yaml or container envs

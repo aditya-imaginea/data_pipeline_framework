@@ -27,4 +27,6 @@ OPENAI_API_KEY
 # Output artifacts
 batches/
 state_logs/
+results/
+uploads/
 *.jsonl
