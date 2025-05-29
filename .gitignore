@@ -29,4 +29,8 @@ batches/
 state_logs/
 results/
 uploads/
+requests/
+scripts/
+storage/
+
 *.jsonl
