@@ -1,165 +1,154 @@
-# 🧠 Data Pipeline Framework (Dockerized + AI-Validated)
+# Data Pipeline Framework
 
-A modular, Dockerized data pipeline framework that allows users to define, submit, and validate data pipelines using OpenAI for transformation accuracy. Includes REST API for dynamic pipeline submissions.
-
----
-
-## 🚀 Features
-
-- ✅ Modular pre-hook, transform, and post-hook logic
-- 🐳 Docker-based batch processing (parallel per 100 records)
-- 🧾 OpenAI integration for data validation
-- 🛠️ REST API (FastAPI) to submit and fetch pipeline results
-- 📂 Auto-generated Swagger docs at `/docs`
-- 📦 Git-friendly structure with test coverage
+This project enables users to build and execute custom data pipelines with stepwise scripts using a web-based form interface. It supports uploading dataset files, defining pipeline steps (with optional pre-hook and post-hook scripts), and processing data in batches using Docker containers.
 
 ---
 
-## 📁 Project Structure
+## Features
+
+* 📄 Upload datasets (JSON format)
+* 🧩 Define pipeline steps with:
+
+  * **Main Transformation Script** (required)
+  * **Pre-Hook Script** (optional)
+  * **Post-Hook Script** (optional)
+* 🔄 Batch-based processing
+* 🐳 Dockerized execution for each batch
+* 📥 Aggregated results stored per request ID
+* 🧠 Compatible with OpenAI API hooks
+
+---
+
+## Project Structure
 
 ```
-data_pipeline_framework/
-├── api/
-│   └── main.py                # FastAPI entrypoint
-├── batches/                   # Auto-generated data batches
-├── pipeline/
-│   ├── engine.py              # Core pipeline execution
-│   └── loader.py              # Loads pipeline definitions & datasets
-├── scripts/sample_pipeline/
-│   ├── capital_pre_hook.py
-│   ├── capital_transform.py
-│   └── capital_post_hook.py
-├── datasets/
-│   └── sample_dataset.json
-├── storage/
-│   └── pipeline_definitions/
-│       └── pipeline_definition.json
-├── output/
-│   └── aggregated_results/    # Final results per request_id
+project-root/
+│
+├── app/
+│   ├── main.py               # FastAPI backend
+│   ├── templates/index.html  # HTML UI
+│   ├── static/script.js      # Form logic and submission
+│   └── pipeline/
+│       ├── engine.py         # Executes a pipeline on a dataset
+│       ├── executor.py       # Runs pipeline logic stepwise
+│       ├── loader.py         # Loads pipeline definition and dataset
+├── batch_runner.py           # Splits dataset and runs pipeline per batch in Docker
 ├── Dockerfile
 ├── requirements.txt
-├── batch_runner.py
 └── README.md
 ```
 
 ---
 
-## 🧪 Example Record Format
+## Setup Instructions
 
-### ✅ Valid
-```json
-{"id": "100", "country": "India", "capital": "Delhi"}
-```
+### Prerequisites
 
-### ❌ Invalid
-```json
-{"id": "101", "country": "UK", "capital": "Islamabad"}
-```
+* Python 3.8+
+* Docker
+* Node.js (optional, if using build tools for frontend)
 
----
-
-## ⚙️ Setup
-
-### ▶️ Local Setup
+### Installation
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/your-username/data_pipeline_framework.git
+git clone <repo-url>
 cd data_pipeline_framework
-
-# 2. Set up virtualenv
-python -m venv venv && source venv/bin/activate
+python -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
-
-# 3. Run API
-uvicorn api.main:app --reload
 ```
 
-### 🐳 Docker Setup
+### Running the App
 
 ```bash
-# Build the Docker image
-docker build -t data-pipeline:latest .
-
-# Run pipeline using Docker
-python batch_runner.py
+uvicorn app.main:app --reload
 ```
+
+Then navigate to `http://localhost:8000` to use the form.
 
 ---
 
-## 🔑 Environment Variables
+## Using the Form Interface
 
-Set your OpenAI key locally or via Docker:
+1. Fill out the pipeline form:
 
-### Local
-```bash
-export OPENAI_API_KEY=your-key
-```
+   * Upload your dataset (JSON file)
+   * Add steps (Main script required, Pre/Post optional)
+   * Specify batch size (e.g., 50)
+2. Click **Submit** to send the pipeline definition and files.
+3. Backend:
 
-### Docker
-Pass as environment variable:
-```bash
-docker run -e OPENAI_API_KEY=your-key ...
-```
-
----
-
-## 🌐 API Endpoints
-
-### 📤 `POST /submit_pipeline`
-
-Submit your dataset and pipeline for processing.
-
-- `pipeline_file`: JSON file
-- `dataset_file`: JSON file
-
-✅ Response:
-```json
-{ "request_id": "abc123" }
-```
+   * Saves scripts & files under a request UUID
+   * Runs `batch_runner.py` in background using Docker per batch
+   * Aggregates outputs
 
 ---
 
-### 📥 `GET /get_result/{request_id}`
+## File Upload Format
 
-Returns the aggregated result for a given request ID.
+* **Dataset**: JSON list of objects
+* **Pipeline JSON** (auto-generated from UI):
 
-✅ Response:
 ```json
 {
-  "results": [
-    { "id": "100", "result": "valid work" },
-    ...
+  "name": "example_pipeline",
+  "steps": [
+    {
+      "name": "validation_step",
+      "pre_script": "pre_hook.py",
+      "main_script": "main_transform.py",
+      "post_script": "post_hook.py"
+    }
   ]
 }
 ```
 
 ---
 
-## 🧠 Powered By
+## Developer Notes
 
-- [FastAPI](https://fastapi.tiangolo.com/)
-- [Docker](https://www.docker.com/)
-- [OpenAI Python SDK](https://github.com/openai/openai-python)
-- [Uvicorn](https://www.uvicorn.org/)
+### Submit Endpoint (`/submit_pipeline`)
+
+* Accepts a `FormData` payload:
+
+  * `pipeline`: JSON file
+  * `dataset`: JSON file
+  * `batch_size`: Integer
+  * Script files with keys like `main_0`, `pre_0`, `post_0`
+
+### Batch Runner
+
+* Splits dataset into batch files
+* Calls `engine.py` inside a Docker container:
+
+```bash
+docker run --rm -v "$PWD:/app" data-pipeline:latest \
+  python pipeline/engine.py pipeline.json batch.json output.json scripts/
+```
+
+### Engine Script
+
+* Loads the pipeline
+* Applies step logic using the `PipelineExecutor`
+* Saves a `state_table` JSON for each batch
 
 ---
 
-## 🤝 Contributing
+## TODO / Enhancements
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Submit a PR 🙌
-
----
-
-## 📄 License
-
-MIT License — feel free to use with attribution.
+* Progress tracking UI
+* Auth for upload endpoint
+* Validation for uploaded scripts
+* Support for multiple pipeline templates
 
 ---
 
-## 📬 Questions?
+## License
 
-Ping `aditya.palagummi@yourdomain.com` or open an issue.
+MIT License
+
+---
+
+## Author
+
+Built by \[Aditya Palagummi] – PRs welcome!
