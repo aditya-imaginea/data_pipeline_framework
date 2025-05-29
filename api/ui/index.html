@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pipeline Submission UI</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        input[type="file"],
+        input[type="number"] {
+            margin-top: 0.5rem;
+            display: block;
+        }
+        .step {
+            background: #f1f1f1;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 6px;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            margin-top: 1rem;
+        }
+        .response {
+            margin-top: 2rem;
+            white-space: pre-wrap;
+            background: #efefef;
+            padding: 1rem;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Submit a Data Pipeline</h1>
+        <form id="pipelineForm">
+            <div class="form-group">
+                <label for="pipelineDefinition">Pipeline Definition File (pipeline.json):</label>
+                <input type="file" id="pipelineDefinition" name="pipelineDefinition" required>
+            </div>
+
+            <div class="form-group">
+                <label for="datasetFile">Dataset JSON File:</label>
+                <input type="file" id="datasetFile" name="datasetFile" required>
+            </div>
+
+            <div class="form-group">
+                <label for="batchSize">Batch Size:</label>
+                <input type="number" id="batchSize" name="batchSize" value="10" required>
+            </div>
+
+            <div class="form-group">
+                <h3>Pipeline Steps</h3>
+                <div id="stepsContainer"></div>
+                <button type="button" onclick="addStep()">Add Step</button>
+            </div>
+
+            <button type="submit">Submit Pipeline</button>
+        </form>
+
+        <div id="responseContainer" class="response"></div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
