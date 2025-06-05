@@ -58,10 +58,15 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### Build Docker Image
+```
+docker build -t data-pipeline-framework .
+```
+
 ### Running the App
 
 ```bash
-uvicorn app.main:app --reload
+uvicorn api.main:app --reload
 ```
 
 Then navigate to `http://localhost:8000` to use the form.

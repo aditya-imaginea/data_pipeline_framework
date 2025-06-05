@@ -18,6 +18,7 @@ venv/
 # Environment variables / secrets
 .env
 *.env
+.DS_Store
 OPENAI_API_KEY
 
 # IDE/editor settings
@@ -34,3 +35,4 @@ scripts/
 storage/
 
 *.jsonl
+
