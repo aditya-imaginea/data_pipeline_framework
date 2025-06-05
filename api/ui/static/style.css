@@ -1,55 +1,13 @@
+/*
+ * style.css
+ * This file is intentionally minimal, as most styling is handled by Tailwind CSS
+ * utility classes directly in the HTML.
+ */
+
+/* Custom font for the entire application */
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    margin: 0;
-    padding: 20px;
+    font-family: 'Inter', sans-serif;
 }
 
-.container {
-    max-width: 800px;
-    margin: auto;
-    background: white;
-    padding: 30px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-h1, h3 {
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-top: 10px;
-}
-
-input[type="text"], input[type="number"], input[type="file"] {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.response {
-    margin-top: 30px;
-    padding: 15px;
-    background: #e9ecef;
-    border-left: 4px solid #007bff;
-    white-space: pre-wrap;
-    font-family: monospace;
-}
+/* Add any truly custom animations or global overrides here */
+/* For instance, the custom spin animation for the loader is defined directly in HTML's <style> tag */

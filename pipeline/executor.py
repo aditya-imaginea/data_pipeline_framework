@@ -125,6 +125,6 @@ class PipelineExecutor:
             
             all_transitions.append(state_record) # Store the complete state history for this record
 
-        logger.info("Pipeline execution completed.")
+        logger.info("Pipeline execution completed."+state_record)
         return all_transitions
 

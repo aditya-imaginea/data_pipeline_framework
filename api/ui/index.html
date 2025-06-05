@@ -2,78 +2,87 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Pipeline Submission UI</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Pipeline Submission</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Custom styles for font and any specific overrides not easily done with Tailwind */
         body {
-            font-family: Arial, sans-serif;
-            margin: 2rem;
-            background-color: #f9f9f9;
+            font-family: 'Inter', sans-serif;
         }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        /* Custom spinner animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        input[type="file"],
-        input[type="number"] {
-            margin-top: 0.5rem;
-            display: block;
-        }
-        .step {
-            background: #f1f1f1;
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 6px;
-        }
-        button {
-            padding: 0.5rem 1rem;
-            margin-top: 1rem;
-        }
-        .response {
-            margin-top: 2rem;
-            white-space: pre-wrap;
-            background: #efefef;
-            padding: 1rem;
-            border-radius: 6px;
+        .animate-spin-custom {
+            animation: spin 1s linear infinite;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Submit a Data Pipeline</h1>
-        <form id="pipelineForm">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="container bg-white shadow-xl rounded-xl p-8 max-w-2xl w-full">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">
+                <span class="text-blue-600">🚀</span> Data Pipeline Orchestrator
+            </h1>
+            <p class="text-gray-600">Submit and manage your data processing workflows.</p>
+        </header>
+
+        <div id="messageContainer" class="hidden p-4 mb-4 rounded-lg text-sm" role="alert"></div>
+
+        <form id="pipelineForm" class="space-y-6">
             <div class="form-group">
-                <label for="pipelineDefinition">Pipeline Definition File (pipeline.json):</label>
-                <input type="file" id="pipelineDefinition" name="pipelineDefinition" required>
+                <label for="pipelineDefinition" class="block text-gray-700 text-sm font-medium mb-1">
+                    Pipeline Definition File (<code class="font-mono text-xs">pipeline.json</code>):
+                </label>
+                <input type="file" id="pipelineDefinition" name="pipelineDefinition" required
+                       class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer">
+                <p class="text-xs text-gray-500 mt-1">Select the JSON file defining your pipeline steps.</p>
             </div>
 
             <div class="form-group">
-                <label for="datasetFile">Dataset JSON File:</label>
-                <input type="file" id="datasetFile" name="datasetFile" required>
+                <label for="datasetFile" class="block text-gray-700 text-sm font-medium mb-1">
+                    Dataset JSON File:
+                </label>
+                <input type="file" id="datasetFile" name="datasetFile" required
+                       class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer">
+                <p class="text-xs text-gray-500 mt-1">Upload the dataset you wish to process.</p>
             </div>
 
             <div class="form-group">
-                <label for="batchSize">Batch Size:</label>
-                <input type="number" id="batchSize" name="batchSize" value="10" required>
+                <label for="batchSize" class="block text-gray-700 text-sm font-medium mb-1">
+                    Batch Size:
+                </label>
+                <input type="number" id="batchSize" name="batchSize" value="10" required min="1"
+                       class="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                <p class="text-xs text-gray-500 mt-1">Number of records to process per batch.</p>
             </div>
 
-            <div class="form-group">
-                <h3>Pipeline Steps</h3>
-                <div id="stepsContainer"></div>
-                <button type="button" onclick="addStep()">Add Step</button>
+            <div class="form-group space-y-4">
+                <h3 class="text-2xl font-semibold text-gray-800">Pipeline Steps</h3>
+                <div id="stepsContainer" class="space-y-4">
+                    </div>
+                <button type="button" id="addStepBtn"
+                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                    Add Step
+                </button>
             </div>
 
-            <button type="submit">Submit Pipeline</button>
+            <button type="submit" id="submitPipelineBtn"
+                    class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50 flex items-center justify-center">
+                <svg id="loadingSpinner" class="animate-spin-custom h-5 w-5 mr-3 text-white hidden" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span id="buttonText">Submit Pipeline</span>
+            </button>
         </form>
 
-        <div id="responseContainer" class="response"></div>
+        <div id="responseContainer" class="bg-gray-800 text-gray-50 p-6 rounded-lg mt-8 shadow-inner overflow-x-auto text-sm font-mono hidden">
+            <h3 class="text-xl font-semibold text-gray-200 mb-4">Pipeline Result:</h3>
+            <pre class="whitespace-pre-wrap break-words"></pre>
+        </div>
     </div>
 
     <script src="/static/script.js"></script>

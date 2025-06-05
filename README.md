@@ -59,14 +59,17 @@ pip install -r requirements.txt
 ```
 
 ### Build Docker Image
-```
+
+```bash
 docker build -t data-pipeline-framework .
 ```
+
+> This builds the Docker image used to run pipeline batches in isolated containers.
 
 ### Running the App
 
 ```bash
-uvicorn api.main:app --reload
+uvicorn app.main:app --reload
 ```
 
 Then navigate to `http://localhost:8000` to use the form.

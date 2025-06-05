@@ -21,6 +21,8 @@ mypy>=1.5.0
 
 #openapi
 openai>=1.0.0
+#googleapi
+google-generativeai
 
 #for RESTful container
 fastapi
